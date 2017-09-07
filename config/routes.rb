@@ -1,0 +1,19 @@
+Rails.application.routes.draw do
+
+  get 'subscribe', to: 'subsribe#new'
+  post 'subscribe', to: 'subscribe#create'
+  get 'created', to: 'subscribe#created'
+  get 'confirm/:token', to: 'subscribe#confirm'
+  get 'welcome', to: 'subscribe#complete'
+
+  root to: 'questions#index'
+
+  resources :users
+  resources :answers
+  resources :questions
+  get 'login', to: 'user_session#new'
+  post 'login', to: 'user_session#create'
+  delete 'logout', to: 'user_session#destroy'
+
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+end
