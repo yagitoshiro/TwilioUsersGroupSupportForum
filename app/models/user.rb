@@ -3,8 +3,8 @@ class User < ApplicationRecord
   has_secure_password
   has_many :questions
   has_many :answers
-  before_create: generate_token
-  before_create: set_activation_status
+  before_create :generate_token
+  before_create :set_activation_status
 
   validates :name, presence: true, uniqueness: true, length: {minimum: 6, maximum: 100}
   validates :mail, presence: true, uniqueness: true, length: {minimum: 4, maximum: 20}
