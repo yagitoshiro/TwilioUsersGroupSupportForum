@@ -1,7 +1,7 @@
 <%= form_with(model: question, local: true) do |form| %>
   <% if question.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(question.errors.count, "error") %> prohibited this question from being saved:</h2>
+      <h2><%= question.errors.count %>個のエラーがあります。</h2>
 
       <ul>
       <% question.errors.full_messages.each do |message| %>
@@ -11,27 +11,23 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title, id: :question_title %>
+  <div class="form-group">
+    <label for="title">タイトル</label>
+    <%= form.text_field :title, id: :question_title, class: 'form-control', placeholder: 'わかりやすい質問の件名', style: 'text-alignn: left;' %>
+    <small id="title-help" class="form-text text-muted">一目でわかる質問のタイトルだと回答も早いです！「わかりません」「動かない」だけだとちょっと辛い…</small>
   </div>
 
-  <div class="field">
-    <%= form.label :body %>
-    <%= form.text_field :body, id: :question_body %>
+  <div class="form-group">
+    <label for="body">質問の本文</label>
+    <%= form.text_area :body, id: :question_body, class: 'form-control', placeholder: '現象、再現方法、期待した結果、調べたことなどが記載されていると最高です。', rows: 10 %>
   </div>
 
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.number_field :user_id, id: :question_user_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :score %>
-    <%= form.number_field :score, id: :question_score %>
+  <div class="form-group">
+    <label for="body">タグ</label>
+    <%= form.text_field :tag_list, id: :question_tag_list, class: 'form-control', placeholder: 'カンマ区切りでタグを入力' %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <input type="submit" value="登録する" class="btn btn-primary" />
   </div>
 <% end %>

@@ -1,2 +1,24 @@
-<h1>Subscribe#new</h1>
-<p>Find me in app/views/subscribe/new.html.erb</p>
+<div class="wrapper">
+	<div class="container">
+		<%= form_for(@user, url: {controller: :subscribe, action: :create}, html: {class: "form", style: 'top: -40px'}) do |f| %>
+		  <%= f.text_field :name, placeholder: 'ユーザー名', max_length: 20 %>
+		  <%= f.text_field :mail, placeholder: 'メールアドレス', max_length: 20 %>
+		  <%= f.password_field :password, placeholder: 'パスワード', max_length: 20 %>
+		  <%= f.password_field :password_confirmation, placeholder: 'パスワード（確認用）', max_length: 20 %>
+			<button type="submit" id="login-button">規約に同意して登録</button>
+		<% end %>
+	</div>
+</div>
+
+<div class="terms">
+<h3 class="term-title">利用規約と個人情報について</h3>
+<strong>短いバージョン</strong>
+<p>みんなで助け合いましょう。</p>
+<p>みんなのパスワードは復号できないように保存しているよ！</p>
+<p>メールアドレスは他所では使わないし何もしないし興味もないよ！</p>
+<strong>長いバージョン</strong>
+<p>みんなで助け合いましょう。</p>
+<p>みんなのパスワードは復号できないように保存しているよ！</p>
+<p>メールアドレスは他所では使わないし何もしないし興味もないよ！</p>
+<p>本当だよ！</p>
+</div>

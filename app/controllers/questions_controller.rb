@@ -4,7 +4,7 @@ class QuestionsController < ApplicationController
   # GET /questions
   # GET /questions.json
   def index
-    @questions = Question.all
+    @questions = Question.order('updated_at DESC').page(params[:page]).per(params[:per] || 50)
   end
 
   # GET /questions/1
@@ -25,6 +25,8 @@ class QuestionsController < ApplicationController
   # POST /questions.json
   def create
     @question = Question.new(question_params)
+    @question.set_user(@current_user)
+    @question.init_score
 
     respond_to do |format|
       if @question.save
@@ -69,6 +71,6 @@ class QuestionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
-      params.require(:question).permit(:title, :body, :user_id, :score)
+      params.require(:question).permit(:title, :body, :user_id, :score, :tag_list)
     end
 end

@@ -1,2 +1,25 @@
-<h1>UserSession#new</h1>
-<p>Find me in app/views/user_session/new.html.erb</p>
+<div class="wrapper">
+	<div class="container">
+		<h1>ようこそ</h1>
+		
+		<%= form_for(@user, url: {controller: :user_session, action: :create}, html: {class: "form"}) do |f| %>
+		  <%= f.text_field :mail, placeholder: 'メールアドレス', max_length: 100 %>
+		  <%= f.password_field :password, placeholder: 'パスワード', max_length: 20 %>
+			<button type="submit" id="login-button">ログイン</button>
+      <div class="subscribe-link"><a href="/subscribe">新規登録はこちら</a></div>
+		<% end %>
+	</div>
+	
+	<ul class="bg-bubbles">
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+</div>

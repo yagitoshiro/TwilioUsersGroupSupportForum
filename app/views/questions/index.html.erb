@@ -1,28 +1,30 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Questions</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Body</th>
-      <th>User</th>
-      <th>Score</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
+<% if @current_user %>
+<%= link_button '質問を投稿する', 'btn-primary', new_question_path %>
+<% else %>
+<%= link_button '質問を投稿する', 'btn-primary', login_path %>
+<% end %>
+<table class="table">
   <tbody>
     <% @questions.each do |question| %>
       <tr>
-        <td><%= question.title %></td>
-        <td><%= question.body %></td>
-        <td><%= question.user_id %></td>
-        <td><%= question.score %></td>
-        <td><%= link_to 'Show', question %></td>
-        <td><%= link_to 'Edit', edit_question_path(question) %></td>
-        <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td style="text-align: center; font-size: 36px;"><%= question.score %><div class="table-small">スコア</div></td>
+        <td style="text-align: center; font-size: 36px;"><%= question.answers.size %><div class="table-small">回答数</div></td>
+        <td style="width: 60%; padding-top: 18px;">
+          <%= link_to question.title, question %>
+          <div class="tag-list">
+          <% question.tags.each do |tag| %>
+            <span class="tag-index"><%= link_to tag, "/tags/#{tag}" %></span>
+          <% end %>
+          </div>
+        </td>
+        <td>
+          <%= gravatar_image_tag(question.user.mail, alt: question.user.name, gravatar: {size: 40}) %>
+          <div><%= question.user.name%></div>
+        </td>
+        <td><%= question.answers.any? ? question.answers.last.user.name : '' %></td>
+        <td><%= question.answers.any? ? question.answers.last.updated_at.strftime("%Y-%m-%d %H:%m:%s") : '' %></td>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +32,3 @@
 
 <br>
 
-<%= link_to 'New Question', new_question_path %>

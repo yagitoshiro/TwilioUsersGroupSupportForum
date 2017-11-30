@@ -1,3 +1,75 @@
 // Place all the styles related to the Questions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.content{
+  color: #616161;
+  width: 70%;
+  margin-top: 60px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.right-menu{
+  float: right;
+  width: 30%;
+  position: fixed;
+  padding-left: 20px;
+  padding-right: 20px;
+  right: 0;
+  top: 116px;
+}
+
+.created-banner{
+  margin: 4em;
+}
+
+.table {
+  margin-top: 48px;
+}
+
+.table-small{
+  font-size: 10px;
+}
+
+.tag-index{
+  margin-right: 10px;
+  font-size: 12px;
+  background-color: #6C6B71;
+  color: #F5F5F5;
+  padding: 8px;
+}
+.tag-index a:active{
+  color: #F5F5F5;
+}
+.tag-index a:visited{
+  color: #F5F5F5;
+}
+.tag-index a:link{
+  color: #F5F5F5;
+}
+.tag-index a:hover{
+  color: #F5F5F5;
+}
+
+.tag-list{
+  margin-top: 12px;
+}
+
+.nav-right{
+  color: #F5F5F5;
+}
+
+.nav-right a:active{
+  color: #F5F5F5;
+}
+
+.nav-right a:link{
+  color: #F5F5F5;
+}
+.nav-right a:visited{
+  color: #F5F5F5;
+}
+
+.nav-right a:hover{
+  color: #F5F5F5;
+}

@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
 
-  get 'subscribe', to: 'subsribe#new'
+  get 'subscribe', to: 'subscribe#new'
   post 'subscribe', to: 'subscribe#create'
   get 'created', to: 'subscribe#created'
-  get 'confirm/:token', to: 'subscribe#confirm'
-  get 'welcome', to: 'subscribe#complete'
+  get 'confirm/:activation_token', to: 'subscribe#confirm'
 
   root to: 'questions#index'
 

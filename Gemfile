@@ -54,3 +54,17 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'kaminari'
+gem 'slack-notifier'
+gem 'exception_notification'
+gem 'settingslogic'
+gem 'unicorn'
+gem 'twilio-ruby'
+gem 'activerecord-session_store'
+gem 'bootstrap', '~> 4.0.0.beta2.1'
+gem 'jquery-rails'
+gem 'rest-client'
+gem 'phonelib'
+
+gem 'gravatar_image_tag'
+gem 'acts-as-taggable-on', '~> 5.0'
+gem 'unicode'

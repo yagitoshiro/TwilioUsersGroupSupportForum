@@ -1,18 +1,16 @@
 <p id="notice"><%= notice %></p>
 
+<h2><%= @question.title %></h2>
+<hr />
 <p>
-  <strong>Title:</strong>
-  <%= @question.title %>
-</p>
-
 <p>
-  <strong>Body:</strong>
   <%= @question.body %>
 </p>
 
+<hr />
 <p>
-  <strong>User:</strong>
-  <%= @question.user_id %>
+  <%= gravatar_image_tag(@question.user.mail, alt: @question.user.name, gravatar: {size: 40}) %>
+  <%= @question.user.name %> (<%= @question.user.score.to_i %>)
 </p>
 
 <p>

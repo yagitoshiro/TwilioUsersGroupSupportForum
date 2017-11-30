@@ -1,0 +1,14 @@
+defaults: &defaults
+  site_url: https://japan-twilio-users.group/
+
+development:
+  <<: *defaults
+  site_url: http://localhost:9999/
+
+test:
+  <<: *defaults
+  site_url: http://localhost:9999/
+
+production:
+  <<: *defaults
+
