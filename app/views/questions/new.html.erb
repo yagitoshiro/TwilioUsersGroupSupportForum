@@ -2,4 +2,5 @@
 
 <%= render 'form', question: @question %>
 
-<%= link_to 'Back', questions_path %>
+<div style="margin-top: 40px;"></div>
+<%= link_to raw('<button class="btn btn-info cancel-button">一覧に戻る</button>'),questions_path %>
