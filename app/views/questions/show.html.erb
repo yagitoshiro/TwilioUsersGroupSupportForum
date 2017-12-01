@@ -4,7 +4,7 @@
 <hr />
 <p>
 <p>
-  <%= @question.body %>
+  <%= sanitize @question.body, tags: %w(div strong br ul li ol em del pre blockquote)  %>
 </p>
 
 <hr />
@@ -18,5 +18,6 @@
   <%= @question.score %>
 </p>
 
-<%= link_to 'Edit', edit_question_path(@question) %> |
-<%= link_to 'Back', questions_path %>
+<div style="margin-top: 40px;"></div>
+<%= link_to raw('<button class="btn btn-info cancel-button">一覧に戻る</button>'),questions_path %>
+<%= link_to raw('<button class="btn btn-info cancel-button">編集</button>'), edit_question_path(@question) %> 

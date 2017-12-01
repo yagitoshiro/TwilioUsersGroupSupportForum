@@ -19,7 +19,10 @@
 
   <div class="form-group">
     <label for="body">質問の本文</label>
-    <%= form.text_area :body, id: :question_body, class: 'form-control', placeholder: '現象、再現方法、期待した結果、調べたことなどが記載されていると最高です。', rows: 10 %>
+    <div class="trix-container">
+      <input id="question_body" type="hidden" name="question[body]" value="<%= @question.body%>" />
+      <trix-editor input="question_body" class="form-control" placeholder="現象、再現方法、期待した結果、調べたことなどが記載されていると最高です。" rows="10"></trix-editor>
+    </div>
   </div>
 
   <div class="form-group">
