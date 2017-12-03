@@ -1,4 +1,5 @@
 class SubscribeController < ApplicationController
+  layout 'user_session'
   def new
     @user = User.new
   end

@@ -1,5 +1,3 @@
-<h1>New Answer</h1>
-
-<%= render 'form', answer: @answer %>
-
-<%= link_to 'Back', answers_path %>
+<%= render 'form', answer: @answer, question: @question %>
+<div style="margin-top: 40px;"></div>
+<%= link_button 'キャンセル', 'btn-primary', @question %>

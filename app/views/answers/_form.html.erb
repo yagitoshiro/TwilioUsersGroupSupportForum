@@ -1,7 +1,7 @@
 <%= form_with(model: answer, local: true) do |form| %>
   <% if answer.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(answer.errors.count, "error") %> prohibited this answer from being saved:</h2>
+      <h2><%= answer.errors.count %>個のエラーがあります。</h2>
 
       <ul>
       <% answer.errors.full_messages.each do |message| %>
@@ -9,29 +9,23 @@
       <% end %>
       </ul>
     </div>
+
+    <hr />
+    <h3>質問</h3>
+    <hr />
+    <%= render 'questions/question', question: question %>
+    <hr />
+
   <% end %>
 
-  <div class="field">
-    <%= form.label :question_id %>
-    <%= form.number_field :question_id, id: :answer_question_id %>
+  <div class="form-group">
+    <label for="answer">あなたの回答を投稿</label>
+    <input id="answer_body" type="hidden" name="answer[body]" value="<%= answer.body%>" />
+    <trix-editor input="answer_body" class="form-control" placeholder="" rows="10"></trix-editor>
   </div>
-
-  <div class="field">
-    <%= form.label :body %>
-    <%= form.text_area :body, id: :answer_body %>
-  </div>
-
-  <div class="field">
-    <%= form.label :score %>
-    <%= form.number_field :score, id: :answer_score %>
-  </div>
-
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.number_field :user_id, id: :answer_user_id %>
-  </div>
+  <input type="hidden" name="answer[question_id]" value="<%= @question.id %>" />
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: 'btn btn-primary' %>
   </div>
 <% end %>

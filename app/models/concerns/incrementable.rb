@@ -16,10 +16,20 @@ module Incrementable
     self.update_score(-1)
   end
 
+  def permitted?
+    User.current_user && User.current_user.id != self.user_id && AnswerVoteUser.where(user_id: self.user_id, answer_id: self.id).empty?
+  end
+
   def update_score(n)
-    User.find(self.user_id).increment_atomic(:score, n)
-    self.increment_atomic(:score, n)
-    self.save
+    if permitted?
+      answer_vote = AnswerVoteUser.new(user_id: self.user_id, answer_id: self.id)
+      answer_vote.with_lock do
+        User.find(self.user_id).increment_atomic(:score, n)
+        answer_vote.save!
+        self.increment_atomic(:score, n)
+        self.save!(validate: false)
+      end
+    end
   end
 
 end

@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   def set_login_user
     if session[:id]
       @current_user = User.find(session[:id].to_i)
+      User.current_user = @current_user
     end
   end
 end

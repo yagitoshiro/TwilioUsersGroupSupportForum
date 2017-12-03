@@ -5,7 +5,10 @@
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
   </head>
 
   <body>
@@ -16,5 +19,12 @@
 <div class="right-menu">
 <div class="google-ad">バナーエリア</div>
 </div>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+<script>
+hljs.configure({useBR: false});
+$('pre').each(function(i, block) {
+  hljs.highlightBlock(block);
+});
+</script>
   </body>
 </html>

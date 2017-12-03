@@ -1,6 +1,5 @@
-<h1>Editing Answer</h1>
 
 <%= render 'form', answer: @answer %>
 
-<%= link_to 'Show', @answer %> |
-<%= link_to 'Back', answers_path %>
+<div style="margin-top: 40px;"></div>
+<%= link_to raw('<button class="btn btn-info cancel-button">質問ページに戻る</button>'),question_path(@answer.question) %>

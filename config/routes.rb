@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   get 'created', to: 'subscribe#created'
   get 'confirm/:activation_token', to: 'subscribe#confirm'
 
+  post 'downvote/:answer_id', to: 'answers#downvote'
+  post 'upvote/:answer_id', to: 'answers#upvote'
+
   root to: 'questions#index'
 
   resources :users

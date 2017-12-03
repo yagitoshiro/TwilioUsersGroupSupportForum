@@ -9,22 +9,26 @@
   <tbody>
     <% @questions.each do |question| %>
       <tr>
-        <td style="text-align: center; font-size: 36px;"><%= question.score %><div class="table-small">スコア</div></td>
-        <td style="text-align: center; font-size: 36px;"><%= question.answers.size %><div class="table-small">回答数</div></td>
+        <!--td style="text-align: center; font-size: 36px;"><%= question.score %><div class="table-small">スコア</div></td-->
+        <td style="text-align: center; width: 80px; font-size: 36px;"><%= question.answers.size %><div class="table-small">回答数</div></td>
         <td style="width: 60%; padding-top: 18px;">
           <%= link_to question.title, question %>
           <div class="tag-list">
-          <% question.tags.each do |tag| %>
-            <span class="tag-index"><%= link_to tag, "/tags/#{tag}" %></span>
-          <% end %>
+            <%= render 'tags', tags: question.tags %>
           </div>
         </td>
         <td>
           <%= gravatar_image_tag(question.user.mail, alt: question.user.name, gravatar: {size: 40}) %>
           <div><%= question.user.name%></div>
         </td>
-        <td><%= question.answers.any? ? question.answers.last.user.name : '' %></td>
-        <td><%= question.answers.any? ? question.answers.last.updated_at.strftime("%Y-%m-%d %H:%m:%s") : '' %></td>
+        <td>
+          <% if question.answers.any? %>
+          <% user = question.answers.last.user %>
+          <%= gravatar_image_tag(user.mail, alt: user.name, gravatar: {size: 40}) %>
+          <div><%= user.name%></div>
+          <% end %>
+        </td>
+        <td><%= question.answers.any? ? question.answers.last.updated_at.strftime("%Y-%m-%d %T") : '' %></td>
       </tr>
     <% end %>
   </tbody>

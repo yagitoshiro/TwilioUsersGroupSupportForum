@@ -3,21 +3,43 @@
 <h2><%= @question.title %></h2>
 <hr />
 <p>
-<p>
-  <%= sanitize @question.body, tags: %w(div strong br ul li ol em del pre blockquote)  %>
+  <%= render 'tags', tags: @question.tags %>
 </p>
-
 <hr />
 <p>
-  <%= gravatar_image_tag(@question.user.mail, alt: @question.user.name, gravatar: {size: 40}) %>
-  <%= @question.user.name %> (<%= @question.user.score.to_i %>)
+  <%= render 'question', question: @question %>
 </p>
 
-<p>
+<!--p>
   <strong>Score:</strong>
   <%= @question.score %>
-</p>
+</p-->
+
+<div class="answers">
+  <% if @question.answers.any? %>
+    <p>回答が<%=@question.answers.size %>件あります</p>
+    <% @question.answers.each do |answer| %>
+      <%= render 'answers/answer', answer: answer %>
+    <% end %>
+  <% else %>
+    <p>まだ回答はありません。諦めないで！</p>
+  <% end %>
+</div>
+
+<hr />
+<div class="form-area">
+<% if @current_user  %>
+<%= render 'answers/form', answer: Answer.new %>
+<% else %>
+<%= link_button 'ログインして回答しよう！', 'btn-primary', '/login' %>
+<% end %>
+</div>
 
 <div style="margin-top: 40px;"></div>
 <%= link_to raw('<button class="btn btn-info cancel-button">一覧に戻る</button>'),questions_path %>
+<% if @current_user && @question.user.id == @current_user.id %>
 <%= link_to raw('<button class="btn btn-info cancel-button">編集</button>'), edit_question_path(@question) %> 
+<% end %>
+
+
+

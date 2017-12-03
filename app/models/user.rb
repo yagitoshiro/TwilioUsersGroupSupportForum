@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  cattr_accessor :current_user
+
   include Incrementable
   has_secure_password validations: true
   has_many :questions
@@ -9,7 +11,7 @@ class User < ApplicationRecord
   after_create :send_activation_mail
 
   validates :name, presence: true, uniqueness: true, length: {minimum: 2, maximum: 100}
-  validates :mail, presence: true, uniqueness: true, length: {minimum: 8, maximum: 20}
+  validates :mail, presence: true, uniqueness: true, length: {minimum: 3, maximum: 200}
 
   def generate_token
     self.activation_token = Digest::SHA1.hexdigest([Time.now, rand].join)[0..40]

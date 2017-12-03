@@ -1,6 +1,14 @@
 class AnswersController < ApplicationController
   before_action :set_answer, only: [:show, :edit, :update, :destroy]
 
+  def upvote
+    render plain: Answer.find(params[:answer_id]).upvote, layout: false
+  end
+
+  def downvote
+    render plain: Answer.find(params[:answer_id]).downvote, layout: false
+  end
+
   # GET /answers
   # GET /answers.json
   def index
@@ -19,6 +27,7 @@ class AnswersController < ApplicationController
 
   # GET /answers/1/edit
   def edit
+    @question = Question.find @answer.question_id
   end
 
   # POST /answers
@@ -28,9 +37,10 @@ class AnswersController < ApplicationController
 
     respond_to do |format|
       if @answer.save
-        format.html { redirect_to @answer, notice: 'Answer was successfully created.' }
+        format.html { redirect_to "/questions/#{@answer.question_id}", notice: '回答を投稿しました！' }
         format.json { render :show, status: :created, location: @answer }
       else
+        @question = Question.find(answer_params[:question_id])
         format.html { render :new }
         format.json { render json: @answer.errors, status: :unprocessable_entity }
       end
@@ -42,7 +52,7 @@ class AnswersController < ApplicationController
   def update
     respond_to do |format|
       if @answer.update(answer_params)
-        format.html { redirect_to @answer, notice: 'Answer was successfully updated.' }
+        format.html { redirect_to "/questions/#{@answer.question_id}", notice: '回答を更新しました！' }
         format.json { render :show, status: :ok, location: @answer }
       else
         format.html { render :edit }

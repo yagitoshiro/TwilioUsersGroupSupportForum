@@ -1,4 +1,5 @@
 class Question < ApplicationRecord
+  validates_with OwnerValidator, only: [:update, :destroy]
   include Incrementable
   acts_as_taggable
   belongs_to :user
@@ -9,11 +10,14 @@ class Question < ApplicationRecord
   validates :score, numericality: true
   validates :user_id, numericality: { only_integer: true }, presence: true
 
+  before_validation :init_score, on: [:create]
+  before_validation :set_user_id, on: [:create, :update]
+
   def init_score
-    self.score = 0
+    self.score = 0 if self.id.nil?
   end
 
-  def set_user(user)
-    self.user_id = user.id
+  def set_user_id
+    self.user_id = User.current_user.id || nil
   end
 end

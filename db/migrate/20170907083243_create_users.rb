@@ -7,7 +7,7 @@ class CreateUsers < ActiveRecord::Migration[5.1]
       t.boolean :activation_status
       t.boolean :admin
       t.string :name
-      t.integer :score
+      t.integer :score, default: 0
 
       t.timestamps
     end
