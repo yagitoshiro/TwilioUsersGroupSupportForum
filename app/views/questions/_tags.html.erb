@@ -1,4 +1,8 @@
+<% if tags.any? %>
   <% tags.each do |tag| %>
     <span class="tag-index"><%= link_to tag, "/tags/#{tag}" %></span>
   <% end %>
+<% else %>
+  <p class="small">タグは登録されていません</p>
+<% end %>
 

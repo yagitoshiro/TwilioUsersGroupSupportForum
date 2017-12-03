@@ -26,8 +26,8 @@
   </div>
 
   <div class="form-group">
-    <label for="body">タグ</label>
-    <%= form.text_field :tag_list, id: :question_tag_list, class: 'form-control', placeholder: 'カンマ区切りでタグを入力' %>
+    <label for="body">タグ（カンマ区切り）</label>
+    <%= form.text_field :tag_list, value: @question.tag_list.join(','), id: :question_tag_list, class: 'form-control', placeholder: 'カンマ区切りでタグを入力' %>
   </div>
 
   <div class="actions">

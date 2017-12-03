@@ -4,7 +4,14 @@ class QuestionsController < ApplicationController
   # GET /questions
   # GET /questions.json
   def index
-    @questions = Question.order('updated_at DESC').page(params[:page]).per(params[:per] || 50)
+    if params[:tag]
+      @questions = Question.tagged_with(params[:tag]).order('updated_at DESC').page(params[:page]).per(params[:per] || 50)
+    elsif params[:q]
+      # FIXME 全文検索を使う
+      @questions = Question.where('title like ? or body like ?', "%#{params[:q]}%", "%#{params[:q]}%").order('updated_at DESC').page(params[:page]).per(params[:per] || 50)
+    else
+      @questions = Question.order('updated_at DESC').page(params[:page]).per(params[:per] || 50)
+    end
   end
 
   # GET /questions/1
