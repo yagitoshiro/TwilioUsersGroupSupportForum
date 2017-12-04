@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                      :integer          not null, primary key
+#  mail                    :string
+#  password_digest         :string
+#  activation_token        :string
+#  activation_status       :boolean
+#  admin                   :boolean
+#  name                    :string
+#  score                   :integer
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  activation_check_string :text
+#
+
 class User < ApplicationRecord
   cattr_accessor :current_user
 

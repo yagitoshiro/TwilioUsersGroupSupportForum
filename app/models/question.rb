@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: questions
+#
+#  id         :integer          not null, primary key
+#  title      :string
+#  body       :text
+#  user_id    :integer
+#  score      :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class Question < ApplicationRecord
   validates_with OwnerValidator, only: [:update, :destroy]
   include Incrementable
