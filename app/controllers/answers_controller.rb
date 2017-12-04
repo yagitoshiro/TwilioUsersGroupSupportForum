@@ -1,5 +1,6 @@
 class AnswersController < ApplicationController
-  before_action :set_answer, only: [:show, :edit, :update, :destroy]
+  before_action :set_answer, only: [:show]
+  before_action :set_my_answer, only: [:edit, :update, :destroy]
 
   def upvote
     render plain: Answer.find(params[:answer_id]).upvote, layout: false
@@ -64,17 +65,25 @@ class AnswersController < ApplicationController
   # DELETE /answers/1
   # DELETE /answers/1.json
   def destroy
-    @answer.destroy
-    respond_to do |format|
-      format.html { redirect_to answers_url, notice: 'Answer was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    render file: 'public/404.html'
+    #@answer.destroy
+    #respond_to do |format|
+    #  format.html { redirect_to answers_url, notice: 'Answer was successfully destroyed.' }
+    #  format.json { head :no_content }
+    #end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_answer
       @answer = Answer.find(params[:id])
+    end
+
+    def set_my_answer
+      @answer = Answer.find_by(id: params[:id], user_id: @current_user.id)
+      unless @answer
+        render file: 'public/404.html'
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

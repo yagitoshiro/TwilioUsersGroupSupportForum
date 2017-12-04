@@ -4,8 +4,7 @@
 
 <div class="poster-area">
   <p>
-    <%= gravatar_image_tag(@question.user.mail, alt: @question.user.name, gravatar: {size: 40}) %>
-    <%= @question.user.name %> (<%= @question.user.score.to_i %>)
+  <%= render 'questions/user', user: @question.user %>
   </p>
   <p>
     <%= @question.created_at.strftime("%Y-%m-%d %T") %>

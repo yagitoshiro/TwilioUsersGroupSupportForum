@@ -5,6 +5,11 @@
 <% else %>
 <%= link_button '質問を投稿する', 'btn-primary', login_path %>
 <% end %>
+<div class="search-area">
+  <form class="form-inline">
+    <input type="text" class="form-control" name="q" size="50%" placeholder="検索" value="<%= params[:q].to_s %>" />
+  </form>
+</div>
 <table class="table">
   <tbody>
     <% @questions.each do |question| %>
@@ -18,17 +23,14 @@
           </div>
         </td>
         <td>
-          <%= gravatar_image_tag(question.user.mail, alt: question.user.name, gravatar: {size: 40}) %>
-          <div><%= question.user.name%></div>
+          <%= render 'questions/user', user: question.user %>
         </td>
         <td>
           <% if question.answers.any? %>
-          <% user = question.answers.last.user %>
-          <%= gravatar_image_tag(user.mail, alt: user.name, gravatar: {size: 40}) %>
-          <div><%= user.name%></div>
+          <%= render 'questions/user', user:  question.answers.last.user %>
           <% end %>
         </td>
-        <td><%= question.answers.any? ? question.answers.last.updated_at.strftime("%Y-%m-%d %T") : '' %></td>
+        <td><%= question.answers.any? ? time_ago_in_words(question.answers.last.updated_at) : '' %></td>
       </tr>
     <% end %>
   </tbody>

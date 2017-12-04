@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
-  before_action :set_question, only: [:show, :edit, :update, :destroy]
+  before_action :set_question, only: [:show]
+  before_action :set_my_question, only: [:edit, :update, :destroy]
 
   # GET /questions
   # GET /questions.json
@@ -7,8 +8,13 @@ class QuestionsController < ApplicationController
     if params[:tag]
       @questions = Question.tagged_with(params[:tag]).order('updated_at DESC').page(params[:page]).per(params[:per] || 50)
     elsif params[:q]
-      # FIXME 全文検索を使う
-      @questions = Question.where('title like ? or body like ?', "%#{params[:q]}%", "%#{params[:q]}%").order('updated_at DESC').page(params[:page]).per(params[:per] || 50)
+      where = 'questions.title ilike ? or questions.body ilike ? or answers.body ilike ?'
+      @questions = Question.left_joins(:answers)
+      params[:q].strip.split(' ').each do |q|
+        q = "%#{Unicode::nfkc(q).downcase.to_s}%"
+        @questions = @questions.where(where, q, q, q)
+      end
+      @questions = @questions.group('questions.id').order('updated_at DESC').page(params[:page]).per(params[:per] || 50)
     else
       @questions = Question.order('updated_at DESC').page(params[:page]).per(params[:per] || 50)
     end
@@ -36,7 +42,7 @@ class QuestionsController < ApplicationController
 
     respond_to do |format|
       if @question.save
-        format.html { redirect_to @question, notice: 'Question was successfully created.' }
+        format.html { redirect_to @question, notice: '質問を投稿しました！' }
         format.json { render :show, status: :created, location: @question }
       else
         format.html { render :new }
@@ -50,7 +56,7 @@ class QuestionsController < ApplicationController
   def update
     respond_to do |format|
       if @question.update(question_params)
-        format.html { redirect_to @question, notice: 'Question was successfully updated.' }
+        format.html { redirect_to @question, notice: '質問を更新しました！' }
         format.json { render :show, status: :ok, location: @question }
       else
         format.html { render :edit }
@@ -62,17 +68,25 @@ class QuestionsController < ApplicationController
   # DELETE /questions/1
   # DELETE /questions/1.json
   def destroy
-    @question.destroy
-    respond_to do |format|
-      format.html { redirect_to questions_url, notice: 'Question was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    render file: 'public/404.html'
+    #@question.destroy
+    #respond_to do |format|
+    #  format.html { redirect_to questions_url, notice: 'Question was successfully destroyed.' }
+    #  format.json { head :no_content }
+    #end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_question
       @question = Question.find(params[:id])
+    end
+
+    def set_my_question
+      @question = Question.find_by(id: params[:id], user_id: @current_user.id)
+      unless @question
+        render file: 'public/404.html'
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
