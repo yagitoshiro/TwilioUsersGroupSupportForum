@@ -1,24 +1,12 @@
-# README
+# Twilioユーザーグループのサポートフォーラム
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+これを設置する予定。
+以下に環境のメモ：
 
-Things you may want to cover:
+* Ruby 2.4.2
 
-* Ruby version
+* PostgreSQL、Unicorn
 
-* System dependencies
+* 複数台構成可
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* 環境変数にRAILS_SERVE_STATIC_FILESとSECRET_KEY_BASEを設定すること
