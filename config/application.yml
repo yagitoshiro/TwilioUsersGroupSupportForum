@@ -1,4 +1,5 @@
 defaults: &defaults
+  google_tracking_id: UA-110694482-1
   site_url: https://japan-twilio-users.group/
 
 development:

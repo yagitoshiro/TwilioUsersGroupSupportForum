@@ -1,0 +1,5 @@
+<p id="notice"><%= notice %></p>
+<%= form_for(@user, url: {controller: :reset_password, action: :create}, html: {class: 'form'}) do |t|  %>
+  <%= t.text_field :mail, placeholder: '登録されたメールアドレスを入力してください', max_length: 200, size: '50' %>
+  <%= t.submit '指定したメールアドレスにメールを送信', class: 'btn btn-primary' %>
+<% end %>

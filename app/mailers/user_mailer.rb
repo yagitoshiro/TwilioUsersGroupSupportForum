@@ -18,4 +18,9 @@ class UserMailer < ApplicationMailer
   def activated(user)
     mail subject: '【Twilioユーザーグループ】登録ありがとうございました！', to: user.mail
   end
+
+  def reset_password(r, mail)
+    @url = "#{Settings.site_url}reset_password/edit/#{r.token}"
+    mail subject: '【Twilioユーザーグループ】パスワード再設定について', to: mail
+  end
 end

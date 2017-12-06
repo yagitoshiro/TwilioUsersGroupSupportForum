@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  get 'reset_password', to: 'reset_password#new'
+  post 'reset_password', to: 'reset_password#create'
+  get 'reset_password/edit/:token', to: 'reset_password#edit'
+  patch 'reset_password/update'
+  get 'reset_password/sent', to: 'reset_password#show'
+
   get 'subscribe', to: 'subscribe#new'
   post 'subscribe', to: 'subscribe#create'
   get 'created', to: 'subscribe#created'

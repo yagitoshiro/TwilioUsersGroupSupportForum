@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .content{
+  min-height: 300px;
+  float: left;
   color: #616161;
   width: 70%;
   margin-top: 60px;
@@ -27,6 +29,7 @@ trix-editor{
   padding-right: 20px;
   right: 0;
   top: 116px;
+  min-height: 300px;
 }
 
 .created-banner{
