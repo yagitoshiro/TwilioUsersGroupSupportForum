@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   root to: 'questions#index'
 
-  resources :users
+  #resources :users
   resources :answers
   resources :questions
   get 'login', to: 'user_session#new'
