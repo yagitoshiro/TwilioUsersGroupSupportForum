@@ -13,7 +13,8 @@ class AnswersController < ApplicationController
   # GET /answers
   # GET /answers.json
   def index
-    @answers = Answer.all
+    #@answers = Answer.all
+    render file: 'public/404.html', format: 'html'
   end
 
   # GET /answers/1
