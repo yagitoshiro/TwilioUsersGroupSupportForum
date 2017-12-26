@@ -1,2 +1,2 @@
-    <%= gravatar_image_tag(user.mail, alt: user.name, gravatar: {size: 40}) %>
+    <%= gravatar_image_tag(user.mail, alt: user.name, gravatar: {size: 40, secure: true}) %>
     <%= user.name %> (<%= user.score.to_i %>)

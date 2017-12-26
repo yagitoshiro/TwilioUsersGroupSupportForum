@@ -26,6 +26,8 @@ class Question < ApplicationRecord
   before_validation :init_score, on: [:create]
   before_validation :set_user_id, on: [:create, :update]
 
+	after_create :send_notice
+
   def init_score
     self.score = 0 if self.id.nil?
   end
@@ -33,4 +35,10 @@ class Question < ApplicationRecord
   def set_user_id
     self.user_id = User.current_user.id || nil
   end
+
+	def send_notice
+		notifier = Slack::Notifier.new(ENV["SLACK_URL"])
+    post_data = "サポートフォーラムに投稿がありました（質問）。#{Settings.site_url}questions/#{self.id}"
+    notifier.ping(post_data) if Rails.env == 'production'
+	end
 end

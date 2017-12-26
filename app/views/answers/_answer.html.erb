@@ -1,13 +1,14 @@
 <hr />
+	<div style="word-wrap: break-word;">
   <%= sanitize answer.body, tags: %w(div strong br ul li ol em del pre blockquote h1 a)  %>
+	</div>
 <div class="vote-area">
 <button class="btn btn-primary vote-answer" id="upvote_answer_<%= answer.id%>">いい回答</button>
 <button class="btn btn-warning vote-answer" id="downvote_answer_<%= answer.id%>">悪い回答</button>
 </div>
 <div class="poster-area">
   <p>
-    <%= gravatar_image_tag(answer.user.mail, alt: answer.user.name, gravatar: {size: 40}) %>
-    <%= answer.user.name %> (<%= answer.user.score.to_i %>)
+  	<%= render 'questions/user', user: answer.user %>
   </p>
   <p>
     <%= answer.created_at.strftime("%Y-%m-%d %T") %>
